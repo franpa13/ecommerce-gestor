@@ -1,0 +1,12 @@
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+
+    "outDir": "dist",
+    "rootDir": "src"
+
+  },
+  "include": ["src"]
+}
