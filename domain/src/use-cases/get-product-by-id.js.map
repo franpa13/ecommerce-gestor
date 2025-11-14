@@ -1,0 +1,1 @@
+{"version":3,"file":"get-product-by-id.js","sourceRoot":"","sources":["get-product-by-id.ts"],"names":[],"mappings":";;;AAGA,MAAa,cAAc;IACL;IAApB,YAAoB,WAA8B;QAA9B,gBAAW,GAAX,WAAW,CAAmB;IAAG,CAAC;IAEtD,KAAK,CAAC,OAAO,CAAC,EAAU;QACtB,OAAO,IAAI,CAAC,WAAW,CAAC,OAAO,CAAC,EAAE,CAAC,CAAC;IACtC,CAAC;CACF;AAND,wCAMC"}
