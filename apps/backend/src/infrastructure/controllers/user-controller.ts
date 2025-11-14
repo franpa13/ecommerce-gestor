@@ -1,6 +1,6 @@
 
 import { Request, Response } from 'express';
-import {  CreateUser, LoginUser } from "../../../../domain/dist/index"
+import {  CreateUser, LoginUser } from "../../../../../domain/dist/index"
 import { PostgresUserRepository } from '../repositories/postgres-user-repository';
 
 import jwt from 'jsonwebtoken';

@@ -1,5 +1,5 @@
 // src/infrastructure/repositories/postgres-order-repository.ts
-import { ProductRepository , Product, OrderRepository, Order} from "../../../../domain/dist/index"
+import { ProductRepository , Product, OrderRepository, Order} from "../../../../../domain/dist/index"
 import { pool } from "../database/db";
 
 export class PostgresOrderRepository implements OrderRepository {

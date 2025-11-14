@@ -1,5 +1,5 @@
 // src/infrastructure/repositories/postgres-product-repository.ts
-import { ProductRepository , Product} from "../../../../domain/dist/index"
+import { ProductRepository , Product} from "../../../../../domain/dist/index"
 import { pool } from "../database/db";
 
 export class PostgresProductRepository implements ProductRepository {

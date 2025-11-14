@@ -1,5 +1,5 @@
 // src/infrastructure/repositories/postgres-user-repository.ts
-import { UserRepository  ,User} from "../../../../domain/dist/index"
+import { UserRepository  ,User} from "../../../../../domain/dist/index"
 import { pool } from "../database/db";
 
 export class PostgresUserRepository implements UserRepository {
