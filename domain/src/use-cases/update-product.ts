@@ -1,27 +1,29 @@
-import { ProductRepository } from "../repositories/product-repository";
-import { Product } from "../entities/product";
+import { Product } from "../entities";
+import { ProductRepository } from "../repositories";
 
 export class UpdateProduct {
   constructor(private productRepo: ProductRepository) {}
 
   async execute(id: string, data: {
-    name: string;
-    description: string;
-    price: number;
-    stock: number;
-    categoryId: string;
+    name?: string;
+    description?: string;
+    price?: number;
+    stock?: number;
+    imgUrl?: string;
+    categoryId?: string;
   }): Promise<void> {
-    // Verificar existencia
+
     const existing = await this.productRepo.getById(id);
     if (!existing) throw new Error("Producto no encontrado");
 
     const updated = new Product(
       id,
-      data.name,
-      data.description,
-      data.price,
-      data.stock,
-      data.categoryId
+      data.name ?? existing.name,
+      data.description ?? existing.description,
+      data.price ?? existing.price,
+      data.stock ?? existing.stock,
+      data.imgUrl ?? existing.imgUrl,
+      data.categoryId ?? existing.categoryId
     );
 
     await this.productRepo.update(updated);

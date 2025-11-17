@@ -14,7 +14,8 @@ describe("ListProducts Use Case", () => {
         "Café intenso y aromático",
         1200,
         15,
-        "cat-1"
+        "cat-1",
+        "img"
       ),
       new Product(
         "2",
@@ -22,7 +23,8 @@ describe("ListProducts Use Case", () => {
         "Pan de manteca francés",
         800,
         8,
-        "cat-2"
+        "cat-2",
+        "img"
       )
     ];
 

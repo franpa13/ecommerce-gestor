@@ -7,7 +7,7 @@ import { ProductRepositoryMock } from "../../mock/product-repository-mock";
 describe("GetProductById Use Case", () => {
   it("should return a product by id", async () => {
     const repo = new ProductRepositoryMock();
-    repo.products.push(new Product("123", "Prod1", "Desc", 10, 5, "cat1"));
+    repo.products.push(new Product("123", "Prod1", "Desc", 10, 5, "cat1", "img"));
 
     const useCase = new GetProductById(repo);
     const result = await useCase.execute("123");

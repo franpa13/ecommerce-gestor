@@ -4,7 +4,7 @@ import { Product } from "../entities/product";
 
 
 export class CreateProduct {
-  constructor(private productRepo: ProductRepository) {}
+  constructor(private productRepo: ProductRepository) { }
 
   async execute(data: {
     name: string;
@@ -12,6 +12,7 @@ export class CreateProduct {
     price: number;
     stock: number;
     categoryId: string;
+    imgUrl: string
   }): Promise<void> {
     const product = new Product(
       crypto.randomUUID(),
@@ -19,7 +20,8 @@ export class CreateProduct {
       data.description,
       data.price,
       data.stock,
-      data.categoryId
+      data.imgUrl,
+      data.categoryId,
     );
 
     await this.productRepo.save(product);

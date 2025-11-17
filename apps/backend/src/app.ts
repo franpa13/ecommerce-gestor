@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth-routes';
 import cartRoutes from './routes/cart-routes';
 import productRoutes from './routes/product-routes';
+import categoryRoutes from './routes/category-routes';
 import {  swaggerSpec, swaggerUi } from './swagger/swagger-config';
 
 dotenv.config();
@@ -19,7 +20,7 @@ app.use(express.json());
 app.use('/api', authRoutes);
 app.use('/api', cartRoutes);
 app.use('/api', productRoutes);
-
+app.use('/api', categoryRoutes);
 // Ruta de salud
 app.get('/api/health', (_, res) => res.json({ status: 'OK' }));
 

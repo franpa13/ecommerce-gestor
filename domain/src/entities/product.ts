@@ -5,6 +5,7 @@ export class Product {
     public description: string,
     public price: number,
     public stock: number,
+    public imgUrl:string,
     public categoryId: string
   ) {}
 }

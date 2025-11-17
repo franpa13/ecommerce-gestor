@@ -11,7 +11,7 @@ describe("AddToCart Use Case", () => {
   let addToCart: AddToCart;
 
   const mockCart = { userId: "user1", items: [] };
-  const mockProduct :Product =  { id: "prod1", name: "Café", price: 10 , categoryId : "2" ,description:"mock desc", stock:3 };
+  const mockProduct :Product =  { id: "prod1", name: "Café", price: 10 , categoryId : "2" ,description:"mock desc", stock:3, imgUrl:"img" };
 
   beforeEach(() => {
     // Mocks de repositorios

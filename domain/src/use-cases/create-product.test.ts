@@ -14,6 +14,7 @@ describe("CreateProduct Use Case", () => {
             price: 100,
             stock: 20,
             categoryId: "cat1",
+            imgUrl:"img"
         });
 
         expect(repo.products.length).toBe(1);

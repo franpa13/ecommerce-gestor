@@ -6,7 +6,7 @@ import { ProductRepositoryMock } from "../../mock/product-repository-mock";
 describe("DeleteProduct Use Case", () => {
   it("should delete a product", async () => {
     const repo = new ProductRepositoryMock();
-    repo.products.push(new Product("1", "Prod", "Desc", 10, 5, "cat1"));
+    repo.products.push(new Product("1", "Prod", "Desc", 10, 5, "cat1", "img"));
 
     const useCase = new DeleteProduct(repo);
 

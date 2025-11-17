@@ -7,7 +7,7 @@ import { ProductRepositoryMock } from "../../mock/product-repository-mock";
 describe("UpdateProduct Use Case", () => {
   it("should update an existing product", async () => {
     const repo = new ProductRepositoryMock();
-    repo.products.push(new Product("1", "Old", "Desc", 10, 5, "cat1"));
+    repo.products.push(new Product("1", "Old", "Desc", 10, 5, "cat1", "img"));
 
     const useCase = new UpdateProduct(repo);
 

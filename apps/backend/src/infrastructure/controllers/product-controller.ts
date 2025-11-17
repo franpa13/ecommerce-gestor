@@ -8,6 +8,8 @@ import { CreateProduct } from '../../../../../domain/src/use-cases/create-produc
 import { UpdateProduct } from '../../../../../domain/src/use-cases/update-product';
 import { DeleteProduct } from '../../../../../domain/src/use-cases/delete-product';
 
+
+
 export class ProductController {
   private listProducts: ListProducts;
   private getProductByIdUseCase: GetProductById;
@@ -44,18 +46,36 @@ export class ProductController {
     }
   }
 
-  async createProduct(req: Request, res: Response) {
-    try {
-      await this.createProductUseCase.execute(req.body);
-      res.status(201).json({ message: "Producto creado" });
-    } catch (error) {
-      res.status(500).json({ error: 'Error creando producto' });
+async createProduct(req: Request, res: Response) {
+  try {
+    console.log("Datos recibidos:", req.body);
+    
+    // Valida datos requeridos
+    const { name, description, price, stock, imgUrl, categoryId } = req.body;
+    
+    if (!name || !price || !categoryId ||  !imgUrl) {
+      return res.status(400).json({ 
+        error: 'Nombre, precio y categoría son requeridos' 
+      });
     }
+
+    await this.createProductUseCase.execute(req.body);
+    res.status(201).json({ message: "Producto creado" });
+    
+  } catch (error) {
+    console.error("Error creando producto:", error);
+    res.status(500).json({ 
+      error: 'Error creando producto',
+      details: error instanceof Error ? error.message : 'Error desconocido'
+    });
   }
+}
 
   async updateProduct(req: Request, res: Response) {
     try {
-      await this.updateProductUseCase.execute(req.params.id!, req.body);
+      await this.updateProductUseCase.execute(req.params.id!, {
+        ...req.body
+      });
       res.json({ message: "Producto actualizado" });
     } catch (error) {
       res.status(500).json({ error: 'Error actualizando producto' });

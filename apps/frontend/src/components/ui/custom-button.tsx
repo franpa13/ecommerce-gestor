@@ -6,7 +6,7 @@ import type { VariantProps } from "class-variance-authority"
 interface CustomButtonProps {
     label: string
     loading?: boolean
-    icon?: React.ReactNode
+    icon?: React.ReactElement
     onClick?: () => void
     className?: string
     variant?: VariantProps<typeof buttonVariants>["variant"]
