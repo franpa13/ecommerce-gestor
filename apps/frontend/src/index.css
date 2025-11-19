@@ -69,7 +69,7 @@
   --muted-foreground: oklch(0.52 0.02 240);
 
   /* Accent */
-  --accent: oklch(0.78 0.2 140);
+  --accent: rgb(15, 116, 197);
   --accent-foreground: oklch(0.15 0.01 240);
 
   /* Destructive */
@@ -188,4 +188,29 @@
 }
 [data-radix-dialog-content] {
   max-width: none !important;
+}
+/* CARROUSEL */
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.zoom-out {
+  perspective: 1000px;
+  height: 300px;
+}
+
+.zoom-out__slide div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.zoom-out__slide img {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
 }

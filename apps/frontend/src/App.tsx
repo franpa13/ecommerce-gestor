@@ -1,15 +1,20 @@
 
 import './App.css'
 
-import { CustomButton } from './components/ui/custom-button';
-import { Input } from './components/ui/input';
+import { MainLayout } from './layouts/main-layout';
+
+import { HomePage } from './pages/public/home/home-page';
+
+
 
 function App() {
 
 
   return (
     <>
-      <Input aria-invalid="true" />
+      <MainLayout>
+        <HomePage></HomePage>
+      </MainLayout>
     </>
   )
 }
