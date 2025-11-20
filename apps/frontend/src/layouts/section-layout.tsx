@@ -6,7 +6,7 @@ interface Props {
 
 export const SectionLayout = ({ children, tag = "#TecnoCart", tagClassName = "" }: Props) => {
     return (
-        <section className="bg-gray-100 px-2 md:px-0  mt-5 relative">
+        <section className=" px-2 md:px-0 mt-5 relative">
 
             {/* Tag arriba a la izquierda */}
             <div

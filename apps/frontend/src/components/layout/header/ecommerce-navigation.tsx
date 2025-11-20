@@ -11,7 +11,8 @@ import {
 import { mainCategories } from "../../../const/categories";
 
 // Import mejores iconos
-import { ChevronDown, ChevronUp, ShoppingBag } from "lucide-react";
+import { ChevronDown, ChevronUp, CircleArrowRight, ShoppingBag } from "lucide-react";
+import { CustomButton } from '../../ui/custom-button';
 
 export function EcommerceNavigation() {
   const isMobile = useIsMobile();
@@ -39,9 +40,8 @@ export function EcommerceNavigation() {
         </button>
 
         <div
-          className={`mt-0 bg-white  shadow-lg overflow-hidden transition-all duration-300 ease-in-out ${
-            open ? "max-h-[500px] opacity-100 p-0" : "max-h-0 opacity-0 p-0"
-          }`}
+          className={`mt-0 bg-white  shadow-lg overflow-hidden transition-all duration-300 ease-in-out ${open ? "max-h-[500px] opacity-100 p-0" : "max-h-0 opacity-0 p-0"
+            }`}
         >
           <div className="flex flex-col">
             {mainCategories.map((cat) => (
@@ -74,8 +74,22 @@ export function EcommerceNavigation() {
   // --------------------
   return (
     <div className="w-full bg-accent/90 backdrop-blur-md text-white flex justify-center border-b border-white/10 shadow-sm">
+
       <NavigationMenu className="w-full max-w-7xl">
+
         <NavigationMenuList className="flex w-full justify-center gap-2 py-2">
+          <div className="flex flex-col ">
+
+            <span className="text-xs  text-gray-300">Comprar por</span>
+            <div className="flex items-center gap-2 ">
+              <Link to={"/products"} className=" underline decoration-2 decoration-offset-4">
+                Categorías
+              </Link>
+
+              <CircleArrowRight size={20} />
+            </div>
+          </div>
+
           {mainCategories.map((cat) => (
             <NavigationMenuItem key={cat.label}>
               <NavigationMenuLink asChild>

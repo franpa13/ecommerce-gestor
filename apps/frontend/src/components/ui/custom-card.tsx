@@ -20,13 +20,13 @@ export const CardShop = ({ prod }: CardShopProps) => {
     return (
         <Card
             className=" 
-        w-full max-w-xs p-0 
+        w-full md:max-w-xs p-0 
         rounded-2xl overflow-hidden
         bg-white dark:bg-neutral-900
         shadow-sm hover:shadow-xl
         border border-gray-200 dark:border-neutral-800
         transition-all duration-300 ease-out
-        hover:-translate-y-1 h-full md:h-4/5
+        hover:-translate-y-1 h-full md:h-4/5 py-0
       "
         >
             {/* Image */}
