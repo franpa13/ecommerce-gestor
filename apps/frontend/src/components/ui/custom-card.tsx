@@ -1,22 +1,27 @@
 import { Card, CardContent } from "./card";
-import { Heart } from "lucide-react";
+import { Heart, ShoppingCart } from "lucide-react";
 import { CustomButton } from "./custom-button";
+import type { Product } from "../../interfaces/cart-types";
+import { useCreateCart } from "../../hooks/cart/use-add-item-cart";
 
-export type Product = {
-    id: string;
-    name: string;
-    description: string;
-    categoryId: string;
-    stock: number;
-    price: number;
-    imgUrl: string;
-};
+
+
 
 interface CardShopProps {
     prod: Product;
 }
 
 export const CardShop = ({ prod }: CardShopProps) => {
+
+    const { mutate: addItemPromise, isPending } = useCreateCart();
+    const addToCart = () => {
+        addItemPromise({
+            productId: prod.id,
+            quantity: 1,
+
+        },
+        );
+    }
     return (
         <Card
             className=" 
@@ -100,8 +105,10 @@ export const CardShop = ({ prod }: CardShopProps) => {
 
                     {/* Add to Cart */}
                     <CustomButton
-                        label="+ Add to Cart"
+                        label="Añadir al Carrito"
                         variant="outline"
+                        loading={isPending}
+                        icon={<ShoppingCart size={16} />}
                         className="
               flex-1 h-10 rounded-xl 
               bg-accent dark:bg-white 
@@ -110,6 +117,7 @@ export const CardShop = ({ prod }: CardShopProps) => {
               hover:opacity-90 
               transition-all
             "
+                        onClick={addToCart}
                     />
                 </div>
             </CardContent>

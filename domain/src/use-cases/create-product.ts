@@ -1,7 +1,5 @@
-import { ProductRepository } from "../repositories/product-repository";
-import { Product } from "../entities/product";
-
-
+import { Product } from "../entities";
+import { ProductRepository } from "../repositories";
 
 export class CreateProduct {
   constructor(private productRepo: ProductRepository) { }
@@ -12,18 +10,22 @@ export class CreateProduct {
     price: number;
     stock: number;
     categoryId: string;
-    imgUrl: string
+    imgUrl: string;
   }): Promise<void> {
+    console.log("Datos en use case:", data); // ← Agrega este log
+    
     const product = new Product(
       crypto.randomUUID(),
       data.name,
       data.description,
       data.price,
       data.stock,
-      data.imgUrl,
+      data.imgUrl, // ← Asegúrate de que esto se pasa correctamente
       data.categoryId,
     );
 
+    console.log("Producto creado:", product); // ← Y este log
+    
     await this.productRepo.save(product);
   }
 }

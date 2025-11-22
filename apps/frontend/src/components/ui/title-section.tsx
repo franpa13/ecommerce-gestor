@@ -27,14 +27,14 @@ export const TitleSection: React.FC<TitleSectionProps> = ({
 
   return (
     <div
-      className={`w-full  pt-4 flex ${alignment[align]} ${className}`}
+      className={`w-full  pt-5 flex ${alignment[align]} ${className}`}
     >
       {/* Borde izquierdo */}
       <div className="border-l-4 border-accent mr-3" />
 
       {/* Contenido */}
       <div>
-        <h2 className={`text-sm md:text-lg font-bold ${titleClassName}`}>{title}</h2>
+        <h2 className={`text-sm md:text-xl font-bold ${titleClassName}`}>{title}</h2>
 
         {subtitle && (
           <p className={`text-gray-500 mt-1 ${subtitleClassName}`}>

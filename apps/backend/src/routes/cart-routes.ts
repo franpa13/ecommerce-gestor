@@ -88,7 +88,7 @@ router.post('/cart/items', authenticateToken, (req, res) => cartController.addIt
  *       401:
  *         description: No autorizado
  */
-router.put('/cart/items/{productId}', authenticateToken, (req, res) => cartController.updateItem(req, res));
+router.put('/cart/items/:productId', authenticateToken, (req, res) => cartController.updateItem(req, res));
 
 /**
  * @swagger
@@ -110,7 +110,7 @@ router.put('/cart/items/{productId}', authenticateToken, (req, res) => cartContr
  *       404:
  *         description: Producto no encontrado
  */
-router.delete('/cart/items/{productId}', authenticateToken, (req, res) => cartController.removeItem(req, res));
+router.delete('/cart/items/:productId', authenticateToken, (req, res) => cartController.removeItem(req, res));
 
 /**
  * @swagger

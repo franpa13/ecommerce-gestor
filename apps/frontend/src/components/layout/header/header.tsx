@@ -1,11 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CustomButton } from "../../ui/custom-button";
 import { Input } from "../../ui/input";
-import { userActions } from "../../../const/actions-header";
 import { EcommerceNavigation } from "./ecommerce-navigation";
+import { Link, useNavigate } from "react-router";
+import { useUserActions } from "../../../hooks/use-user-actions";
+import { useAuthStore } from "../../../store/use-auth-store";
+import { useCartQuery } from "../../../hooks/cart/use-get-cart";
+import { useCartStore } from "../../../store/use-cart-store";
+import { GlobalSpinner } from "../../ui/global-spinner";
+
 
 export const Header = () => {
+    const actions = useUserActions();
     const [isOpen, setIsOpen] = useState(false);
+    const { logout } = useAuthStore();
+    const navigate = useNavigate()
+    const navigateRoute = (route: string) => {
+        if (route == "logout") {
+
+            return logout()
+        }
+
+        navigate(route)
+    }
+    // Usar el hook de React Query para obtener el carrito
+    const { data: cartData, isLoading } = useCartQuery();
+
+    // Obtener el método para setear el carrito desde el store
+    const setCartFromServer = useCartStore((state) => state.setCartFromServer);
+
+    // Efecto para sincronizar los datos del servidor con el store
+    useEffect(() => {
+        if (cartData) {
+            setCartFromServer(cartData || []);
+        }
+    }, [cartData]);
 
     return (
         <section>
@@ -13,12 +42,12 @@ export const Header = () => {
                 <div className="flex flex-wrap items-center justify-between mx-auto px-4 py-2">
 
                     {/* Logo */}
-                    <a href="/" className="flex items-center space-x-2 rtl:space-x-reverse">
+                    <Link to="/ecommerce" className="flex items-center space-x-2 rtl:space-x-reverse">
                         <img src="/logo-ecommerce.jpg" className="h-13" alt="Ecommerce Logo" />
                         <span className="self-center text-xl font-bold text-gray-900 whitespace-nowrap">
                             TecnoCart
                         </span>
-                    </a>
+                    </Link>
 
                     {/* Desktop right side */}
                     <div className="hidden md:flex items-center space-x-4">
@@ -44,13 +73,14 @@ export const Header = () => {
 
                         {/* User actions */}
                         <div className="flex items-center space-x-1">
-                            {userActions.map((action) => (
+                            {actions.map((action) => (
                                 <CustomButton
                                     key={action.label}
                                     variant="ghost"
+                                    disabled={action.navigate == "/ecommerce/cart" && isLoading}
                                     icon={action.icon}
                                     label={action.label}
-                                    onClick={action.onClick}
+                                    onClick={() => navigateRoute(action.navigate)}
                                     className="p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-100 transition-colors"
                                 />
                             ))}
@@ -144,13 +174,13 @@ export const Header = () => {
                     {/* Acciones del usuario */}
                     <div className="flex flex-col space-y-2 text-gray-700">
 
-                        {userActions.map((action) => (
+                        {actions.map((action) => (
                             <CustomButton
                                 key={action.label}
                                 variant="ghost"
                                 icon={action.icon}
                                 label={action.label}
-                                onClick={action.onClick}
+                                onClick={() => navigateRoute(action.navigate)}
                                 className="flex items-center justify-start p-3 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition"
                             />
                         ))}

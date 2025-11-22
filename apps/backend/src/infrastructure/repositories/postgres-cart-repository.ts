@@ -1,4 +1,5 @@
-import { Product, CartRepository, Cart, CartItem } from "../../../../../domain/dist/index"
+import { CartRepository, Cart, CartItem } from "../../../../../domain/dist/index"
+import { Product } from "../../../../../domain/dist/src/entities";
 import { pool } from "../database/db";
 
 export class PostgresCartRepository implements CartRepository {
@@ -6,7 +7,7 @@ export class PostgresCartRepository implements CartRepository {
     const result = await pool.query(
       `SELECT c.id as cart_id, c.user_id, c.total,
               ci.product_id, ci.quantity,
-              p.name, p.description, p.price, p.stock, p.category_id
+              p.name, p.description, p.price, p.stock, p.category_id, p.img_url
        FROM carts c
        LEFT JOIN cart_items ci ON c.id = ci.cart_id
        LEFT JOIN products p ON ci.product_id = p.id
@@ -33,6 +34,7 @@ export class PostgresCartRepository implements CartRepository {
           row.description,
           parseFloat(row.price),
           row.stock,
+          row.img_url,
           row.category_id
         ),
         quantity: row.quantity
@@ -45,6 +47,7 @@ export class PostgresCartRepository implements CartRepository {
       parseFloat(result.rows[0].total || '0')
     );
   }
+
 
   async save(cart: Cart): Promise<void> {
     await pool.query('BEGIN');
@@ -74,7 +77,7 @@ export class PostgresCartRepository implements CartRepository {
     }
   }
 
-   async updateItemQuantity(userId: string, productId: number, quantity: number): Promise<Cart> {
+  async updateItemQuantity(userId: string, productId: string, quantity: number): Promise<Cart> {
     await pool.query('BEGIN');
     try {
       const cartResult = await pool.query('SELECT id FROM carts WHERE user_id = $1', [userId]);
@@ -106,7 +109,7 @@ export class PostgresCartRepository implements CartRepository {
     }
   }
 
-  async removeItem(userId: string, productId: number): Promise<void> {
+  async removeItem(userId: string, productId: string): Promise<void> {
     const cartResult = await pool.query('SELECT id FROM carts WHERE user_id = $1', [userId]);
     if (cartResult.rows.length === 0) throw new Error('Carrito no encontrado');
     const cartId = cartResult.rows[0].id;

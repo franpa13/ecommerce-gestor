@@ -1,0 +1,1 @@
+{"version":3,"file":"create-category.js","sourceRoot":"","sources":["create-category.ts"],"names":[],"mappings":";AAAA,uDAAuD;;;AAMvD,MAAa,qBAAqB;IACL;IAA7B,YAA6B,OAAwB;QAAxB,YAAO,GAAP,OAAO,CAAiB;IAAG,CAAC;IAGzD,KAAK,CAAC,OAAO,CAAC,KAA6C;QAC3D,OAAO,IAAI,CAAC,OAAO,CAAC,cAAc,CAAC,KAAK,CAAC,IAAI,EAAE,KAAK,CAAC,WAAW,CAAC,CAAC;IAClE,CAAC;CACA;AAPD,sDAOC"}

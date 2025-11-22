@@ -35,7 +35,7 @@ const controller = new CategoryController();
  *       200:
  *         description: Lista de categorías
  */
-router.get('/categories', authenticateToken, (req, res) =>
+router.get('/categories',  (req, res) =>
   controller.list(req, res)
 );
 
@@ -59,7 +59,7 @@ router.get('/categories', authenticateToken, (req, res) =>
  *       404:
  *         description: Categoría no encontrada
  */
-router.get('/categories/:id', authenticateToken, (req, res) =>
+router.get('/categories/:id',  (req, res) =>
   controller.get(req, res)
 );
 
@@ -123,7 +123,7 @@ router.post('/categories', authenticateToken, (req, res) =>
  *       404:
  *         description: Categoría no encontrada
  */
-router.put('/categories/:id', authenticateToken, (req, res) =>
+router.put('/categories/:id',  (req, res) =>
   controller.update(req, res)
 );
 

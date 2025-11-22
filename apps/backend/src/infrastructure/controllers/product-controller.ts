@@ -7,6 +7,8 @@ import { GetProductById } from '../../../../../domain/src/use-cases/get-product-
 import { CreateProduct } from '../../../../../domain/src/use-cases/create-product';
 import { UpdateProduct } from '../../../../../domain/src/use-cases/update-product';
 import { DeleteProduct } from '../../../../../domain/src/use-cases/delete-product';
+import { Product } from '../../../../../domain/dist/src/entities';
+
 
 
 
@@ -24,12 +26,15 @@ export class ProductController {
     this.getProductByIdUseCase = new GetProductById(productRepository);
     this.createProductUseCase = new CreateProduct(productRepository);
     this.updateProductUseCase = new UpdateProduct(productRepository);
+    this.productRepository = new PostgresProductRepository();
     this.deleteProductUseCase = new DeleteProduct(productRepository);
   }
 
   async ListProducts(req: Request, res: Response) {
     try {
       const products = await this.listProducts.execute();
+
+
       res.json(products);
     } catch (error) {
       res.status(500).json({ error: 'Error obteniendo productos' });
@@ -46,30 +51,60 @@ export class ProductController {
     }
   }
 
-async createProduct(req: Request, res: Response) {
-  try {
-    console.log("Datos recibidos:", req.body);
-    
-    // Valida datos requeridos
-    const { name, description, price, stock, imgUrl, categoryId } = req.body;
-    
-    if (!name || !price || !categoryId ||  !imgUrl) {
-      return res.status(400).json({ 
-        error: 'Nombre, precio y categoría son requeridos' 
+  async createProduct(req: Request, res: Response) {
+    try {
+      console.log("🟢 INICIO - createProduct");
+      console.log("Datos recibidos:", req.body);
+
+      const { name, description, price, stock, imgUrl, categoryId } = req.body;
+
+      // Validación
+      if (!name || !price || !categoryId || !imgUrl) {
+        return res.status(400).json({
+          error: 'Nombre, precio, categoría e imagen son requeridos'
+        });
+      }
+
+      console.log("✅ Validación pasada - creando producto directamente");
+
+      // Crear producto directamente
+      const product = new Product(
+        crypto.randomUUID(),
+        name,
+        description || '',
+        Number(price),
+        Number(stock) || 0,
+        imgUrl,
+        categoryId
+      );
+
+      console.log("📦 Producto creado:", product);
+
+      // Guardar directamente en el repository
+      await this.productRepository.save(product);
+
+      console.log("✅ Producto guardado exitosamente");
+
+      return res.status(201).json({
+        message: "Producto creado",
+        id: product.id
+      });
+
+    } catch (error) {
+      console.error("❌ Error creando producto:", error);
+
+      if (res.headersSent) {
+        console.log("⚠️ Headers ya enviados");
+        return;
+      }
+
+      return res.status(500).json({
+        error: 'Error creando producto',
+        details: error instanceof Error ? error.message : 'Error desconocido'
       });
     }
-
-    await this.createProductUseCase.execute(req.body);
-    res.status(201).json({ message: "Producto creado" });
-    
-  } catch (error) {
-    console.error("Error creando producto:", error);
-    res.status(500).json({ 
-      error: 'Error creando producto',
-      details: error instanceof Error ? error.message : 'Error desconocido'
-    });
   }
-}
+
 
   async updateProduct(req: Request, res: Response) {
     try {

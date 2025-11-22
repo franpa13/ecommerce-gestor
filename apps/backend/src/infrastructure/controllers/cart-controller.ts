@@ -41,8 +41,11 @@ export class CartController {
   }
 
   async updateItem(req: Request, res: Response) {
+          console.log(req, "userid");
     try {
       const userId = (req as any).user.userId;
+
+      
       const { productId } = req.params;
       const { quantity } = req.body;
 
@@ -50,7 +53,7 @@ export class CartController {
         return res.status(400).json({ error: 'La cantidad debe ser mayor a 0' });
       }
 
-      const updatedCart = await this.cartRepository.updateItemQuantity(userId, Number(productId), quantity);
+      const updatedCart = await this.cartRepository.updateItemQuantity(userId, productId!, quantity);
       res.json({ message: 'Cantidad actualizada', cart: updatedCart });
     } catch (error) {
       res.status(500).json({ error: 'Error actualizando cantidad' });
@@ -62,7 +65,7 @@ export class CartController {
       const userId = (req as any).user.userId;
       const { productId } = req.params;
 
-      await this.cartRepository.removeItem(userId, Number(productId));
+      await this.cartRepository.removeItem(userId, productId!);
       res.json({ message: 'Producto eliminado del carrito' });
     } catch (error) {
       res.status(500).json({ error: 'Error eliminando producto del carrito' });

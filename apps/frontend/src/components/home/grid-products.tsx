@@ -1,5 +1,6 @@
 import React from "react";
-import { CardShop, type Product } from "../ui/custom-card";
+import { CardShop } from "../ui/custom-card";
+import { type Product} from '../../interfaces/cart-types';
 
 interface GridProductsProps {
     products: Product[];

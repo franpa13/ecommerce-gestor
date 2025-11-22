@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { CardShop , type Product } from "./custom-card";
+import { CardShop  } from "./custom-card";
+import {type Product } from '../../interfaces/cart-types';
 
 
 // Datos mockeados

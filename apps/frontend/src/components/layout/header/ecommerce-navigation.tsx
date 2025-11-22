@@ -9,18 +9,13 @@ import {
 } from "../../ui/navigation-menu";
 
 import { mainCategories } from "../../../const/categories";
-
-// Import mejores iconos
 import { ChevronDown, ChevronUp, CircleArrowRight, ShoppingBag } from "lucide-react";
-import { CustomButton } from '../../ui/custom-button';
+
 
 export function EcommerceNavigation() {
   const isMobile = useIsMobile();
   const [open, setOpen] = useState(false);
 
-  // --------------------
-  // 📱 MOBILE VERSION
-  // --------------------
   if (isMobile) {
     return (
       <div className="w-full   bg-accent text-white select-none shadow-md">
@@ -69,9 +64,6 @@ export function EcommerceNavigation() {
     );
   }
 
-  // --------------------
-  // 🖥 DESKTOP VERSION
-  // --------------------
   return (
     <div className="w-full bg-accent/90 backdrop-blur-md text-white flex justify-center border-b border-white/10 shadow-sm">
 
@@ -82,7 +74,7 @@ export function EcommerceNavigation() {
 
             <span className="text-xs  text-gray-300">Comprar por</span>
             <div className="flex items-center gap-2 ">
-              <Link to={"/products"} className=" underline decoration-2 decoration-offset-4">
+              <Link to={"/ecommerce/products"} className=" underline decoration-2 decoration-offset-4">
                 Categorías
               </Link>
 
